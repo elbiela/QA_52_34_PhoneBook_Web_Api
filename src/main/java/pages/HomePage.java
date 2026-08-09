@@ -6,10 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class HomePage extends BasePage
-{
-    public HomePage(WebDriver driver)
-    {
+public class HomePage extends BasePage {
+    public HomePage(WebDriver driver) {
         setDriver(driver);
         driver.get("https://telranedu.web.app/home");
         PageFactory.initElements(new AjaxElementLocatorFactory
@@ -21,8 +19,7 @@ public class HomePage extends BasePage
     WebElement btnLogin;
 
 
-    public void clickBtnLogin()
-    {
+    public void clickBtnLogin() {
         btnLogin.click();
     }
 
