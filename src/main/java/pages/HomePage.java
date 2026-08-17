@@ -20,9 +20,6 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//a[text()='LOGIN']")
     WebElement btnLogin;
-    @FindBy(xpath = "//form/input[1]")
-    WebElement inputEmail;
-
 
     public void clickBtnLogin() {
         btnLogin.click();

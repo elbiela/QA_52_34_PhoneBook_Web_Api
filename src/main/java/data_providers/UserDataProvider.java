@@ -15,8 +15,7 @@ public class UserDataProvider {
     public Iterator<User> dataProviderWrongPasswordOrEmail() {
         List<User> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader
-                (new FileReader("src/test/resources" +
-                        "/wrong_email_password.csv"))) {
+                (new FileReader("src/test/resources/wrong_email_password_phonebook.csv"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] splitLine = line.split(",");
@@ -32,4 +31,6 @@ public class UserDataProvider {
         }
         return list.listIterator();
     }
+
+
 }

@@ -13,8 +13,6 @@ public class AppManager {
         return driver;
     }
 
-    ;
-
     @BeforeMethod
     public void setup() {
         driver = new ChromeDriver();
