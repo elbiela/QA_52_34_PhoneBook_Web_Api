@@ -21,7 +21,7 @@ public class AppManager {
         driver.manage().window().maximize();
     }
 
-    @AfterMethod(enabled = false)
+    @AfterMethod
     public void tearDown() {
         if (driver != null)
             driver.quit();

@@ -1,6 +1,6 @@
 package pages;
 
-import dto.UserLombok;
+import dto.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,8 +9,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
-        PageFactory.initElements(new AjaxElementLocatorFactory
-                (driver, 10), this);
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 
     @FindBy(xpath = "//form/input[1]")
@@ -25,12 +24,16 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit' and @name='registration']")
     WebElement btnRegistration;
 
-    public void typeLoginRegistrationForm(UserLombok user) {
+    public void typeLoginRegistrationForm(User user) {
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
     }
 
     public void clickBtnRegistration() {
         btnRegistration.click();
+    }
+
+    public void clickBtnLogin() {
+        btnLogin.click();
     }
 }
