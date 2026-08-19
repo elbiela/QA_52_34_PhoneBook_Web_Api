@@ -29,7 +29,7 @@ public class LoginTests extends AppManager {
         loginPage.clickBtnLogin();
 
         Assert.assertTrue(new ContactsPage(getDriver())
-                .validateTextInMessageNoContacts("No Contacts here!"));
+                .validateBtnContacts());
     }
 
     @Test
