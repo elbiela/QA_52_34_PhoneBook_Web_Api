@@ -15,11 +15,13 @@ import static utils.UserFactory.positiveLoginUser;
 public class LoginTests extends AppManager {
     LoginPage loginPage;
     User user;
+    ContactsPage contactsPage;
 
     @BeforeMethod
     public void goToRegistrationLoginPage() {
         new HomePage(getDriver()).clickBtnLogin();
         loginPage = new LoginPage(getDriver());
+        contactsPage = new ContactsPage(getDriver());
     }
 
     @Test
@@ -28,8 +30,8 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnLogin();
 
-        Assert.assertTrue(new ContactsPage(getDriver())
-                .validateBtnContacts());
+        Assert.assertTrue(contactsPage
+                .validateLinkContacts());
     }
 
     @Test

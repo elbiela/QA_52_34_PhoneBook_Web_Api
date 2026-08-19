@@ -17,13 +17,13 @@ public class ContactsPage extends BasePage {
     WebElement messageNoContacts;
 
     @FindBy(xpath = "//a[@href='/contacts']")
-    WebElement btnContacts;
+    WebElement linkContacts;
 
     public boolean validateTextInMessageNoContacts(String text) {
         return isTextInElementPresent(messageNoContacts, text);
     }
 
-    public boolean validateBtnContacts() {
-        return isBtnPresent(btnContacts);
+    public boolean validateLinkContacts() {
+        return isLinkPresent(linkContacts);
     }
 }

@@ -27,7 +27,7 @@ public abstract class BasePage {
         return false;
     }
 
-    public boolean isBtnPresent(WebElement element) {
+    public boolean isLinkPresent(WebElement element) {
         return element.isDisplayed();
     }
 
