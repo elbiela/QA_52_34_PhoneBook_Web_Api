@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,8 +28,17 @@ public abstract class BasePage {
         return false;
     }
 
-    public boolean isLinkPresent(WebElement element) {
+    public boolean isLinkDisplayed(WebElement element) {
         return element.isDisplayed();
+    }
+
+    public boolean isUrlContainsText(String text) {
+        try {
+            return new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.urlContains(text));
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     public String closeAlert() {

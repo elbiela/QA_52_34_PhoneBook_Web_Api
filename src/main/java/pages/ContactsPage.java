@@ -19,11 +19,12 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath = "//a[@href='/contacts']")
     WebElement linkContacts;
 
-    public boolean validateTextInMessageNoContacts(String text) {
+    public boolean isTextInMessageNoContacts(String text) {
         return isTextInElementPresent(messageNoContacts, text);
     }
 
-    public boolean validateLinkContacts() {
-        return isLinkPresent(linkContacts);
+    public boolean isLinkContactsDisplayed() {
+        return isLinkDisplayed(linkContacts);
     }
+
 }

@@ -12,10 +12,32 @@ import java.util.List;
 
 public class UserDataProvider {
     @DataProvider
-    public Iterator<User> dataProviderWrongPasswordOrEmail() {
+    public Iterator<User> dataProviderWrongPasswordFormat() {
         List<User> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader
-                (new FileReader("src/test/resources/wrong_email_password_phonebook.csv"))) {
+                (new FileReader("src/test/resources/wrong_password_phonebook.csv"))) {
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                String[] splitLine = line.split(",");
+                list.add(User.builder()
+                        .username(splitLine[0])
+                        .password(splitLine[1])
+                        .build());
+                line = bufferedReader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("created exception");
+        }
+        return list.listIterator();
+
+    }
+
+    @DataProvider
+    public Iterator<User> dataProviderWrongEmailFormat() {
+        List<User> list = new ArrayList<>();
+        try (BufferedReader bufferedReader = new BufferedReader
+                (new FileReader("src/test/resources/wrong_email_phonebook.csv"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] splitLine = line.split(",");
@@ -31,6 +53,4 @@ public class UserDataProvider {
         }
         return list.listIterator();
     }
-
-
 }

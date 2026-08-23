@@ -5,6 +5,7 @@ import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.ContactsPage;
 import pages.HomePage;
 import pages.LoginPage;
@@ -16,12 +17,14 @@ public class LoginTests extends AppManager {
     LoginPage loginPage;
     User user;
     ContactsPage contactsPage;
+    SoftAssert softAssert;
 
     @BeforeMethod
     public void goToRegistrationLoginPage() {
         new HomePage(getDriver()).clickBtnLogin();
         loginPage = new LoginPage(getDriver());
         contactsPage = new ContactsPage(getDriver());
+        softAssert = new SoftAssert();
     }
 
     @Test
@@ -30,9 +33,16 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnLogin();
 
-        Assert.assertTrue(contactsPage
-                .validateLinkContacts());
+        softAssert.assertTrue(contactsPage
+                .isLinkContactsDisplayed(),
+                "validate isLinkContactsDisplayed");
+        softAssert.assertTrue(contactsPage
+                .isUrlContainsText("contacts"),
+                "validate isUrlContainsText contacts");
+        softAssert.assertAll();
     }
+
+
 
     @Test
     public void loginNegativeWrongEmailTest() {
@@ -43,8 +53,10 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnLogin();
 
-        Assert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password"));
+        softAssert.assertTrue(loginPage.closeAlert()
+                .contains("Wrong email or password"),
+                "validate alert Wrong email or password");
+        softAssert.assertAll();
     }
 
     @Test
@@ -56,8 +68,10 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnLogin();
 
-        Assert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password"));
+        softAssert.assertTrue(loginPage.closeAlert()
+                        .contains("Wrong email or password"),
+                "validate alert Wrong email or password");
+        softAssert.assertAll();
     }
 
     @Test
@@ -67,9 +81,11 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnLogin();
 
-        Assert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password"));
-    }
+        softAssert.assertTrue(loginPage.closeAlert()
+                        .contains("Wrong email or password"),
+                "validate alert Wrong email or password");
+        softAssert.assertAll();
+}
 
     @Test
     public void loginNegativeEmptyPasswordFieldTest() {
@@ -78,8 +94,10 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnLogin();
 
-        Assert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password"));
+        softAssert.assertTrue(loginPage.closeAlert()
+                        .contains("Wrong email or password"),
+                "validate alert Wrong email or password");
+        softAssert.assertAll();
     }
 
     @Test
@@ -90,7 +108,9 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnLogin();
 
-        Assert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password"));
+        softAssert.assertTrue(loginPage.closeAlert()
+                        .contains("Wrong email or password"),
+                "validate alert Wrong email or password");
+        softAssert.assertAll();
     }
 }
