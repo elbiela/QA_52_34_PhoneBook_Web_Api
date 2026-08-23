@@ -34,14 +34,13 @@ public class LoginTests extends AppManager {
         loginPage.clickBtnLogin();
 
         softAssert.assertTrue(contactsPage
-                .isLinkContactsDisplayed(),
+                        .isLinkContactsDisplayed(),
                 "validate isLinkContactsDisplayed");
         softAssert.assertTrue(contactsPage
-                .isUrlContainsText("contacts"),
+                        .isUrlContainsText("contacts"),
                 "validate isUrlContainsText contacts");
         softAssert.assertAll();
     }
-
 
 
     @Test
@@ -54,7 +53,7 @@ public class LoginTests extends AppManager {
         loginPage.clickBtnLogin();
 
         softAssert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password"),
+                        .contains("Wrong email or password"),
                 "validate alert Wrong email or password");
         softAssert.assertAll();
     }
@@ -85,7 +84,7 @@ public class LoginTests extends AppManager {
                         .contains("Wrong email or password"),
                 "validate alert Wrong email or password");
         softAssert.assertAll();
-}
+    }
 
     @Test
     public void loginNegativeEmptyPasswordFieldTest() {

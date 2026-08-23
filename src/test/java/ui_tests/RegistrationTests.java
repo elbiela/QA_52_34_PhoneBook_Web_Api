@@ -85,7 +85,7 @@ public class RegistrationTests extends AppManager {
         loginPage.clickBtnRegistration();
 
         softAssert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password format"),
+                        .contains("Wrong email or password format"),
                 "validate alert wrong email or password format");
         softAssert.assertAll();
     }
@@ -97,7 +97,7 @@ public class RegistrationTests extends AppManager {
         loginPage.clickBtnRegistration();
 
         softAssert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password format"),
+                        .contains("Wrong email or password format"),
                 "validate alert wrong email or password format");
         softAssert.assertAll();
     }
@@ -110,19 +110,19 @@ public class RegistrationTests extends AppManager {
         loginPage.clickBtnRegistration();
 
         softAssert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password format"),
+                        .contains("Wrong email or password format"),
                 "validate alert wrong email or password format");
         softAssert.assertAll();
     }
 
     @Test
-    public void registrationNegativeExistingUserTest(){
+    public void registrationNegativeExistingUserTest() {
         user = positiveLoginUser();
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnRegistration();
 
         softAssert.assertTrue(loginPage.closeAlert()
-                .contains("User already exist"),
+                        .contains("User already exist"),
                 "validate alert user already exist");
         softAssert.assertAll();
     }
