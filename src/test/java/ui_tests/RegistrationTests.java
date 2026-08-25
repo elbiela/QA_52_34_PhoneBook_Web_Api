@@ -26,6 +26,7 @@ public class RegistrationTests extends AppManager {
 
     @BeforeMethod
     public void goToRegistrationLoginPage() {
+        logger.info("Start registration test");
         new HomePage(getDriver()).clickBtnLogin();
         loginPage = new LoginPage(getDriver());
         softAssert = new SoftAssert();
@@ -53,6 +54,7 @@ public class RegistrationTests extends AppManager {
         Assert.assertTrue(new ContactsPage(getDriver())
                 .isTextInMessageNoContacts("No Contacts here!"));
     }
+
 
     @Test
     public void registrationNegativeEmptyAllFieldsTest() {
@@ -84,20 +86,9 @@ public class RegistrationTests extends AppManager {
                 .contains("Wrong email or password format"));
     }
 
-    @Test(dataProvider = "dataProviderWrongPasswordFormat",
+    @Test(dataProvider = "dataProviderWrongEmailAndPasswordFormat",
             dataProviderClass = UserDataProvider.class)
-    public void registrationNegativeWrongPasswordFormatTest(User user) {
-        loginPage.typeLoginRegistrationForm(user);
-        loginPage.clickBtnRegistration();
-
-        Assert.assertTrue(loginPage.closeAlert()
-                .contains("Wrong email or password format"));
-    }
-
-
-    @Test(dataProvider = "dataProviderWrongEmailFormat",
-            dataProviderClass = UserDataProvider.class)
-    public void registrationNegativeWrongEmailFormatTest(User user) {
+    public void registrationNegativeWrongEmailAndPasswordFormatTest(User user) {
         loginPage.typeLoginRegistrationForm(user);
         loginPage.clickBtnRegistration();
 

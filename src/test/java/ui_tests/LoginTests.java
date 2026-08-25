@@ -19,6 +19,7 @@ public class LoginTests extends AppManager {
 
     @BeforeMethod
     public void goToRegistrationLoginPage() {
+        logger.info("Start login test");
         new HomePage(getDriver()).clickBtnLogin();
         loginPage = new LoginPage(getDriver());
         contactsPage = new ContactsPage(getDriver());
