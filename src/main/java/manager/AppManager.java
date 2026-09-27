@@ -13,7 +13,7 @@ public class AppManager {
     private WebDriver driver;
     public Logger logger = LoggerFactory.getLogger(AppManager.class);
 
-    protected WebDriver getDriver() {
+    public WebDriver getDriver() {
         return driver;
     }
 
