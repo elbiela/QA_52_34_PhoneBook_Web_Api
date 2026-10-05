@@ -20,8 +20,19 @@ dependencies {
 
     implementation 'net.datafaker:datafaker:2.5.2'
 
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+
 }
 
 test {
     useTestNG()
+}
+
+tasks.register('smoke', Test) {
+    group = 'verification'
+    description = 'Runs PhoneBook UI smoke tests (login and registration).'
+    useTestNG() {
+        suites 'src/test/resources/smoke.xml'
+    }
 }
