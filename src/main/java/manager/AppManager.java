@@ -17,14 +17,14 @@ public class AppManager {
         return driver;
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup(Method method) {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         logger.info("Start testing with method: " + method.getName());
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         if (driver != null)
             driver.quit();

@@ -24,7 +24,7 @@ public class RegistrationTests extends AppManager {
     User user;
     SoftAssert softAssert;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationLoginPage() {
         logger.info("Start registration test");
         new HomePage(getDriver()).clickBtnLogin();
@@ -45,7 +45,7 @@ public class RegistrationTests extends AppManager {
                 .isTextInMessageNoContacts("No Contacts here!"));
     }
 
-    @Test
+    @Test(groups = {"smoke", "regress", "user", "positive"})
     public void registrationPositiveWithFakerTest() {
         user = positiveRegistrationUser();
         System.out.println(user);
@@ -96,7 +96,7 @@ public class RegistrationTests extends AppManager {
                 .contains("Wrong email or password format"));
     }
 
-    @Test
+    @Test(groups = {"smoke","regress","user","negative"})
     public void registrationNegativeExistingUserTest() {
         user = positiveLoginUser();
         loginPage.typeLoginRegistrationForm(user);

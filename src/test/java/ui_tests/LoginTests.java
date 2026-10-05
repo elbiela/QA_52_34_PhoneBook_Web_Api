@@ -17,7 +17,7 @@ public class LoginTests extends AppManager {
     User user;
     ContactsPage contactsPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationLoginPage() {
         logger.info("Start login test");
         new HomePage(getDriver()).clickBtnLogin();
@@ -25,7 +25,7 @@ public class LoginTests extends AppManager {
         contactsPage = new ContactsPage(getDriver());
     }
 
-    @Test
+    @Test(groups = {"smoke", "regress", "user", "positive"})
     public void loginPositiveTest() {
         user = positiveLoginUser();
         loginPage.typeLoginRegistrationForm(user);
@@ -36,7 +36,7 @@ public class LoginTests extends AppManager {
     }
 
 
-    @Test
+    @Test(groups = {"smoke","regress","user","negative"})
     public void loginNegativeWrongEmailTest() {
         user = User.builder()
                 .username(getProperty("base.properties", "wrongEmail"))
@@ -49,7 +49,7 @@ public class LoginTests extends AppManager {
                         .contains("Wrong email or password"));
     }
 
-    @Test
+    @Test(groups = {"smoke","regress","user","negative"})
     public void loginNegativeWrongPasswordTest() {
         user = User.builder()
                 .username(getProperty("base.properties", "email"))
