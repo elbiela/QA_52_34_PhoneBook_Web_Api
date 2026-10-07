@@ -39,7 +39,7 @@ tasks.register('smoke', Test) {
 
 tasks.register('apiRegress', Test){
     group = 'regression';
-    description = 'Runs PhoneBook API regress tests(login and registration).'
+    description = 'Runs PhoneBook API regress tests (login and registration).'
     useTestNG() {
         suites 'src/test/resources/regression.xml'
     }

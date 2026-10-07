@@ -47,7 +47,7 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
     }
 
     @Test
-    public void addNewContactWithSoftAssertPositiveTest(){
+    public void addNewContactApiWithSoftAssertPositiveTest(){
         ContactDto contact = positiveContact();
         System.out.println(contact);
         System.out.println(tokenDto.getToken());
@@ -73,5 +73,64 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
         softAssert.assertTrue(responseMessageDto.getMessage()
                 .contains("Contact was added!"), "validate message Contact was added");
         softAssert.assertAll();
+    }
+
+    @Test
+    public void addNewContactApiWrongTokenNegativeTest(){
+        ContactDto contact = positiveContact();
+        System.out.println(contact);
+        System.out.println(tokenDto.getToken());
+        RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
+        Request request = new Request.Builder()
+                .url(BASE_URL+ADD_CONTACT)
+                .addHeader(AUTH, "sdlkfslhf488un")
+                .post(requestBody)
+                .build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals(response.code(), 401);
+    }
+
+    @Test
+    public void addNewContactApiEmptyTokenNegativeTest(){
+        ContactDto contact = positiveContact();
+        System.out.println(contact);
+        System.out.println(tokenDto.getToken());
+        RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
+        Request request = new Request.Builder()
+                .url(BASE_URL+ADD_CONTACT)
+                .addHeader(AUTH, "")
+                .post(requestBody)
+                .build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals(response.code(), 403);
+    }
+
+    @Test
+    public void addNewContactApiWOTokenNegativeTest(){
+        ContactDto contact = positiveContact();
+        System.out.println(contact);
+        System.out.println(tokenDto.getToken());
+        RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
+        Request request = new Request.Builder()
+                .url(BASE_URL+ADD_CONTACT)
+                .post(requestBody)
+                .build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals(response.code(), 403);
     }
 }
