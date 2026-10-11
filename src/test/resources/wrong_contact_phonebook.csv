@@ -1,0 +1,9 @@
+,,Johnson,smith@example.com,0501234567,Haifa,Homework 14
+,Smith,,smith@example.com,0501234567,Haifa,Homework 14
+,Smith,Johnson,invalidemail.com,0501234567,Haifa,Homework 14
+,Smith,Johnson,smith@example.com,123,Haifa,Homework 14
+,Smith,Johnson,smith@example.com,,Haifa,Homework 14
+,Smith,Johnson,smith@example.com,0501234567,,Homework 14
+,Smith,Johnson,smith@example.com,abcdefghij,Haifa,Homework 14
+,Smith,Johnson,smith@example.com,050abc4567,Haifa,Homework 14
+,Smith,Johnson,smith@example.com,+05012345,Haifa,Homework 14

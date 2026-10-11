@@ -1,5 +1,6 @@
 package api_tests;
 
+import data_providers.NegativeContactDataProvider;
 import dto.ContactDto;
 import dto.ResponseMessageDto;
 import dto.TokenDto;
@@ -21,7 +22,7 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
     TokenDto tokenDto;
     SoftAssert softAssert =  new SoftAssert();
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void login(){
         tokenDto = loginGetToken();
     }
@@ -30,7 +31,6 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
     public void addNewContactPositiveTest(){
         ContactDto contact = positiveContact();
         System.out.println(contact);
-        System.out.println(tokenDto.getToken());
         RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
         Request request = new Request.Builder()
                 .url(BASE_URL+ADD_CONTACT)
@@ -50,7 +50,6 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
     public void addNewContactApiWithSoftAssertPositiveTest(){
         ContactDto contact = positiveContact();
         System.out.println(contact);
-        System.out.println(tokenDto.getToken());
         RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
         Request request = new Request.Builder()
                 .url(BASE_URL+ADD_CONTACT)
@@ -75,11 +74,10 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "contact", "negative", "homework14"})
     public void addNewContactApiWrongTokenNegativeTest(){
         ContactDto contact = positiveContact();
         System.out.println(contact);
-        System.out.println(tokenDto.getToken());
         RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
         Request request = new Request.Builder()
                 .url(BASE_URL+ADD_CONTACT)
@@ -95,11 +93,10 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
         Assert.assertEquals(response.code(), 401);
     }
 
-    @Test
+    @Test(groups = {"regression", "contact", "negative", "homework14"})
     public void addNewContactApiEmptyTokenNegativeTest(){
         ContactDto contact = positiveContact();
         System.out.println(contact);
-        System.out.println(tokenDto.getToken());
         RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
         Request request = new Request.Builder()
                 .url(BASE_URL+ADD_CONTACT)
@@ -115,11 +112,10 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
         Assert.assertEquals(response.code(), 403);
     }
 
-    @Test
+    @Test(groups = {"regression", "contact", "negative", "homework14"})
     public void addNewContactApiWOTokenNegativeTest(){
         ContactDto contact = positiveContact();
         System.out.println(contact);
-        System.out.println(tokenDto.getToken());
         RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
         Request request = new Request.Builder()
                 .url(BASE_URL+ADD_CONTACT)
@@ -132,5 +128,23 @@ public class AddNewContactApiTests implements BaseApi, ILogin {
             throw new RuntimeException(e);
         }
         Assert.assertEquals(response.code(), 403);
+    }
+
+    @Test(dataProvider = "dataProviderWrongContactFormat",
+            dataProviderClass = NegativeContactDataProvider.class,
+            groups = {"regression", "contact", "negative", "homework14"})
+    public void addNewContactApiWrongContactFormatNegativeTest(ContactDto contact) {
+        RequestBody requestBody = RequestBody.create(GSON.toJson(contact), JSON);
+        Request request = new Request.Builder()
+                .url(BASE_URL + ADD_CONTACT)
+                .addHeader(AUTH, tokenDto.getToken())
+                .post(requestBody)
+                .build();
+        try (Response response = OK_HTTP_CLIENT.newCall(request).execute()) {
+            Assert.assertEquals(response.code(), 400,
+                    "validate status code for invalid contact: " + contact);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
